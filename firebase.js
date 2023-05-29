@@ -189,6 +189,32 @@ function searchUsers() {
             selectElement.appendChild(optionElement);
           });
 
+          // Add change event listener to select element
+          selectElement.addEventListener("change", (event) => {
+            const selectedStatus = event.target.value;
+            const docRef = doc.ref; // Get the document reference
+            // Display a confirmation alert
+            const confirmation = window.confirm(
+              "คุณต้องการเปลี่ยนสถานะหรือไม่?"
+            );
+
+            if (confirmation) {
+              // Update the status field in Firestore
+              docRef
+                .update({ status: selectedStatus })
+                .then(() => {
+                  alert(`อัพเดดทสถานะเป็น "${event.target.value}" เรียบร้อย`);
+                  console.log("Status updated successfully");
+                })
+                .catch((error) => {
+                  console.error("Error updating status:", error);
+                });
+            } else {
+              // Revert the select element value if the confirmation is canceled
+              selectElement.value = doc.data().status;
+            }
+          });
+
           statusCell.appendChild(selectElement);
           row.appendChild(statusCell);
 
