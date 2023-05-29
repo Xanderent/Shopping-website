@@ -15,7 +15,6 @@
 }
 
 .receipt {
-    display: contents;
     width: 100%;
 }
 
@@ -36,7 +35,7 @@
 }
 
 .tr-list {
-    height: 500px;
+    height: 450px;
 }
 
 .search {
